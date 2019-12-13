@@ -1,0 +1,143 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## SQL Employee Database Analysis\n",
+    "###  Import data from PostgreSQL,  Database: SQL_Employee_db"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Imports the method used to connect to DBs\n",
+    "from sqlalchemy import create_engine\n",
+    "import pandas as pd\n",
+    "import os\n",
+    "import numpy as np\n",
+    "import matplotlib.mlab as mlab\n",
+    "import matplotlib.pyplot as plt\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# variables to populate the database connection string\n",
+    "\n",
+    "db_user = 'postgres'\n",
+    "db_password = 'gracem10'\n",
+    "db_host = 'localhost'\n",
+    "db_port = 5432\n",
+    "\n",
+    "# This database must already exist\n",
+    "# db_name = \"SQL_Employee_db\"\n",
+    "db_name = \"SQL_Employee_db\"\n",
+    "\n",
+    "engine = create_engine(f\"postgres://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "connection = engine.connect()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "salary_data = pd.read_sql(\"SELECT distinct salary FROM salaries ORDER BY salary\", engine)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "salary_data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dog_list = session.query(Dog)\n",
+    "for doggy in dog_list:\n",
+    "    print(doggy.name)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#!/usr/bin/env python\n",
+    "\n",
+    "\n",
+    "# example data\n",
+    "mu = 100 # mean of distribution\n",
+    "sigma = 15 # standard deviation of distribution\n",
+    "x = mu + sigma * np.random.randn(10000)\n",
+    "\n",
+    "num_bins = 20\n",
+    "# the histogram of the data\n",
+    "n, bins, patches = plt.hist(x, num_bins, normed=1, facecolor='blue', alpha=0.5)\n",
+    "\n",
+    "# add a 'best fit' line\n",
+    "y = mlab.normpdf(bins, mu, sigma)\n",
+    "plt.plot(bins, y, 'r--')\n",
+    "plt.xlabel('Smarts')\n",
+    "plt.ylabel('Probability')\n",
+    "plt.title(r'Histogram of IQ: $\\mu=100$, $\\sigma=15$')\n",
+    "\n",
+    "# Tweak spacing to prevent clipping of ylabel\n",
+    "plt.subplots_adjust(left=0.15)\n",
+    "plt.show()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
